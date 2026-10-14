@@ -1,0 +1,13 @@
+name: Build C++ application
+on:
+  push:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: g++ -std=c++17 -Wall -Wextra -pedantic main.cpp -o student-results
+      - name: Smoke test
+        run: printf '1\nAma Mensah\n85\n3\n6\n' | ./student-results | grep 'Average score: 85.00'
